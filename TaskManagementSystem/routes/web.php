@@ -8,3 +8,6 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('dashboard');
 });
+Route::get('/create-task', function () {
+    return view('add_task');
+});
