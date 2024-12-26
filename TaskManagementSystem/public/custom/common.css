@@ -20,4 +20,12 @@ label {
 .bg-green {
   background-color: rgb(12, 74, 23);
   color: rgb(137, 233, 137);
+}
+
+table {
+  border-collapse: collapse !important;
+}
+table th, table td {
+  border: 1px solid grey;
+  padding: 0.2rem !important;
 }/*# sourceMappingURL=common.css.map */

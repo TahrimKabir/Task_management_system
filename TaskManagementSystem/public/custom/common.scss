@@ -19,3 +19,12 @@ label{
     background-color: rgb(12, 74, 23);
     color: rgb(137, 233, 137);
 }
+
+table{
+    
+    border-collapse: collapse!important;
+    th,td{
+        border: 1px solid grey;
+        padding:0.2rem!important;
+    }
+}
