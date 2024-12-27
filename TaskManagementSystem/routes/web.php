@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskFilterController;
+use App\Http\Controllers\TaskApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,7 +23,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/stored-task',[TaskController::class,'store'])->name('task.store');
     Route::get('/tasks', [TaskFilterController::class, 'index']);
 Route::get('/tasks-data', [TaskFilterController::class, 'TaskList'])->name('task.data');
+Route::get('/edit-task/{id}',[TaskController::class,'edit'])->name('task-edit');
+Route::post('/task-updated',[TaskController::class,'update'])->name('task-update');
+Route::get('/delete-task/{id}',[TaskController::class,'delete'])->name('task-delete');
+
+// api
+
+// 
 
 });
+
+Route::get('/csrf-token', function () {
+    return response()->json(['csrf_token' => csrf_token()]);
+});
+Route::post('/task-creation',[TaskApiController::class,'store']);
+Route::get('/check-status/{id}',[TaskApiController::class,'check_status']);
+Route::post('/status-updated',[TaskApiController::class,'update_status']);
 
 require __DIR__.'/auth.php';

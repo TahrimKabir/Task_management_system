@@ -11,11 +11,21 @@ class TaskController extends Controller
    }
 
    public function store(Request $req){
-    $data = array(
-        "name"=>$req->name,
-    );
-    
     Task::create($req->except(['_token']));
+    return redirect()->back();
+   }
+
+   public function edit($id){
+   $task = Task::where('id',$id)->first();
+   return view('edit-task',compact('task'));
+   }
+
+   public function update(Request $req){  
+    Task::where('id',$req->user_id)->update($req->except(['_token']));
+    return redirect()->back();
+   }
+   public function delete($id){
+    Task::where('id',$id)->delete();
     return redirect()->back();
    }
 }

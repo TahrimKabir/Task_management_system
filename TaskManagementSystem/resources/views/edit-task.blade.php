@@ -12,7 +12,7 @@
             <ol class="breadcrumb float-sm-end">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    Create Task
+                    Update Task
                 </li>
             </ol>
         </div>
@@ -32,23 +32,32 @@
                                 d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
                             <path
                                 d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7.256A4.5 4.5 0 0 0 12.5 8a4.5 4.5 0 0 0-3.59 1.787A.5.5 0 0 0 9 9.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .39-.187A4.5 4.5 0 0 0 8.027 12H6.5a.5.5 0 0 0-.5.5V16H3a1 1 0 0 1-1-1zm2 1.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3 0v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
-                        </svg> Create New Task</h5>
+                        </svg> Update New Task</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('task.store') }}">
+                    <form method="post" action="{{ route('task-update') }}">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="" class="d-block mb-0">Create New Task</label>
-                                <input type="text" name="name" id="" class="box-input">
+                                <label for="" class="d-block mb-0">Update New Task</label>
+                                <input type="text" name="name" id="" class="box-input" value="{{$task->name}}">
+                                <input type="hidden" name="user_id" value="{{$task->id}}">
                             </div>
                             
                         </div>
                         <div class="row mt-1">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="" class="d-block mb-0">Deadline</label>
-                                <input type="date" name="deadline" id="" class="box-input">
-                                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                <input type="date" name="deadline" id="" class="box-input" value="{{date('Y-m-d',strtotime($task->deadline))}}">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="" class="d-block mb-0">Select Status</label>
+                                <select name="status" class="box-input">
+                                <option value="Pending" @if($task->status=="Pending") selected @endif>Pending</option>
+                                <option value="Progress"  @if($task->status=="Progress") selected @endif>In Progress</option>
+                                <option value="Completed" @if($task->status=="Completed") selected @endif>Completed</option>
+                                </select>
                             </div>
                             
                         </div>
