@@ -35,7 +35,7 @@
 
                         <li class="nav-item menu-open"> <a href="#" class="nav-link active"> <i class="nav-icon bi bi-speedometer"></i>
                                 <p>
-                                    Task
+                                    Settings
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 </p>
                             </a>
